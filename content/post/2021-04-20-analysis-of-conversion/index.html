@@ -59,6 +59,6 @@ text(x=obs_pct_diff, y=180, labels = &quot;Observed conversion&quot;, adj=1)</co
 <p>Conversion In our case, this is the ratio of the number of users who pressed the button to the total number of unique site visitors. Thus, the observed change in conversion in our AB test is the difference between conversion in the considered groups A and B.</p>
 <p>Well, but how in this case, assess the significance? Let’s consider two hypotheses - zero hypothesis sounds like ‘the observed difference in conversion is random’, while alternative - ‘the difference observed in conversion is not random’.</p>
 <p>Change of the conversion will be significant if it is greater than random conversion change.</p>
-<p>Let’s simulate a random process, in which in 50357 outcomes conversion was in 13984 cases. That is, create a vector of length 50357, in which the 36373 elements are zero, and 13984 are equal to 1. Now many times (set, 1000) will randomly divide the sample into two parts: the first length 27182 and the second 23175.</p>
-<p>In each part, we will consider the ratio of the number of units to the sample size and find the difference between themselves.</p>
-<p>This conversion change we will save and, in the future, use to build a histogram.</p>
+<p>Let’s simulate a random process, in which among 50357 unique visitors conversion was in 13984 cases. That is, we create a vector of length 50357, in which the 36373 elements are zero, and 13984 are equal to 1. Now we randomly form two vectors A and B of length 27182 and 23175 consequently many times (e.g. 1000).</p>
+<p>In each vector, we will consider the ratio of the number of units to the sample size and find the difference between themselves. <span class="math inline">\(\delta=\frac{count(A==1)}{length(A)}-\frac{count(B==1)}{length(B)}\)</span></p>
+<p>At each iteration, the change in the <span class="math inline">\(\delta\)</span> was saved in the vector and later used to build the histogram.</p>
