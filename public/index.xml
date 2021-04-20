@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Notes about DataScience</title>
+    <link>/</link>
+    <description>Recent content on Notes about DataScience</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 18 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Useful instruments</title>
+      <link>/2021/04/18/useful-instruments/</link>
+      <pubDate>Sun, 18 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/04/18/useful-instruments/</guid>
+      <description>Before you start learning data science, you should understand that this science is closely related to statistics, data warehouses, decision systems, databases. In addition, you will need to acquire a statistical analysis environment. In my opinion, python and R are better suited for this. The choice of these tools does not limit you in any way. If you still think that you can carry out the analysis in the same Excel - go for it.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Thu, 01 Apr 2021 21:48:51 -0700</pubDate>
+      
+      <guid>/about/</guid>
+      <description>This site is dedicated to areas such as data science and statistics. Recently, interest in these areas has increased greatly, as more and more data needs to be analyzed in order to choose the right business development strategy. Despite the fact that a data analyst does not need such a deep knowledge of statistics and methods of processing the data obtained, but rather the speed of analysis and the ability to interpret the results obtained, he should know modern and generally accepted methods of testing hypotheses, be able to build predictive models, identify the main factors affecting the result, be able to analyze all the optimizations of project managers and immediately assess their viability.</description>
+    </item>
+    
+  </channel>
+</rss>
