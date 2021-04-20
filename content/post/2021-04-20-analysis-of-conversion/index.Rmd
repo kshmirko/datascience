@@ -1,0 +1,8 @@
+---
+title: Analysis of conversion
+author: 'Konstantin Shmirko'
+date: '2021-04-20'
+slug: analysis-of-conversion
+categories: [R, conversion]
+tags: []
+---

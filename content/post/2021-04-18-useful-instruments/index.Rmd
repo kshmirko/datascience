@@ -16,5 +16,5 @@ The threshold of entry into R is higher than Python, but all this should not sca
 To familiarize yourself with R and Python, you can use the following links:
 
 1. [https://www.r-project.org]
+2. [www.python.org]
 
-1. 
