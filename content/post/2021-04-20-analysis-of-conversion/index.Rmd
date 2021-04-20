@@ -6,3 +6,53 @@ slug: analysis-of-conversion
 categories: [R, conversion]
 tags: []
 ---
+
+Consider a typical task for the data analytics: some Internet portal for the sale of used cars decided to increase the conversion by changing the style and attractiveness of some user interface elements. The color of the button is changed to communicate with the seller. After that, AB testing was carried out in which a group of users saw a button in the old style, and the group B - in the new.
+
+The task is to determine the change in conversion and evaluate its significance.
+
+
+User statistics are given in the table.
+
+| Result        | Case A | Case B |
+|:--------------|-------:|-------:|
+|Conversion     | 7339   | 6645   |
+| No Conversion | 19843  | 16530  |
+
+
+```{r echo=TRUE, warning=FALSE, cache=TRUE}
+
+perm_fun <- function(x, n1, n2) {
+  n <- n1 + n2
+  idx_b <- sample(1:n, n1)
+  idx_a <- setdiff(1:n, idx_b)
+  mean_diff <- mean(x[idx_b]) - mean(x[idx_a]) 
+  return(mean_diff)
+}
+
+
+obs_pct_diff<-100*(6645/23175-7339/27182)
+conversion<-c(rep(0, 36373), rep(1, 13984))
+perm_diffs <-rep(0, 1000)
+
+for(i in 1:1000){
+  perm_diffs[i] <- 100*perm_fun(conversion, 27182, 23175)
+}
+
+hist(perm_diffs, xlab='Random change in conversion', xlim = c(-1.8, 1.8), main = "")
+abline(v = obs_pct_diff)
+text(x=obs_pct_diff, y=180, labels = "Observed conversion", adj=1)
+```
+
+Based on the drawing, we see that the experimental change in conversion lies much to the right than the change of conversion due to random processes. Thus, we can conclude that the change in conversion is 1.67% - is a statistically significant.
+
+Conversion In our case, this is the ratio of the number of users who pressed the button to the total number of unique site visitors. Thus, the observed change in conversion in our AB test is the difference between conversion in the considered groups A and B.
+
+Well, but how in this case, assess the significance? Let's consider two hypotheses - zero hypothesis sounds like 'the observed difference in conversion is random', while alternative - 'the difference observed in conversion is not random'.
+
+Let's simulate a random process, in which in 50357 outcomes conversion was in 13984 cases. That is, create a vector of length 50357, in which the 36373 elements are zero, and 13984 are equal to 1. Now many times (set, 1000) will randomly divide the sample into two parts: the first length 27182 and the second 23175.
+
+In each part, we will consider the ratio of the number of units to the sample size and find the difference between themselves.
+
+This conversion change we will save and, in the future, use to build a histogram.
+
