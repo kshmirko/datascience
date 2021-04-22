@@ -19,7 +19,7 @@ menu:
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 2.7.5
-  description: A website built through Hugo and blogdown.
+  description: Welcome to my website for statistics and data analysis. Here, I discuss in detail certain topics related to data analysis, their application in real life, and also give possible solutions.
   favicon: favicon.ico
   highlightjsCDN: //cdnjs.cloudflare.com/ajax/libs
   highlightjsLang:
