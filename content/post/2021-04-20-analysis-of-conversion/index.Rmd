@@ -120,7 +120,7 @@ prop.test(x=c(7339,6645), n=c(27182, 23175))
 ```
 
 
-The p-value of the test is $3.05\cdot10^{-5}$, which is less than the significance level alpha = 0.05. We can conclude that the proportion of smokers is significantly different in the two groups with a p-value = $3.05\cdot10^{-5}$.
+The p-value of the test is $3.05\cdot10^{-5}$, which is less than the significance level alpha = 0.05. We can conclude that the conversion is significantly different in the two groups with a p-value = $3.05\cdot10^{-5}$.
 
 
 
