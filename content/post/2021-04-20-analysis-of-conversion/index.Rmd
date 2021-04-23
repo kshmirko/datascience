@@ -58,3 +58,69 @@ In each vector, we will consider the ratio of the number of units to the sample 
 
 At each iteration, the change in the $\delta$  was saved in the vector and later used to build the histogram.
 
+
+## Alternative approach ##
+
+What we have done above is called bootstrapping, we simulate statistical experiment many times and then give the explanation through analysis of the result.
+
+But this technique becomes available only in computer era. 
+
+We also can get same results using z-test (for large sample size) of Fisher Exact probability test otherwise. In this case we have following hypotheses
+
+1. $H_0: p_A=p_B$
+2. $H_0: p_A \le p_B$
+3. $H_0: p_A \ge p_B$
+
+and corresponding alternative hypotheses are:
+
+1. $H_a: p_A \ne p_B$
+2. $H_0: p_A \gt p_B$
+3. $H_0: p_A \lt p_B$
+
+The test ststistics can be calculated as follows:
+
+$$
+  z=\frac{p_A-p_B}{\sqrt{pq/n_A - pq/n_B}}
+$$
+where 
+
+* $p_A$ is the proportion observed in group A with size $n_A$;
+* $p_B$  is the proportion observed in group B with size $n_B$;
+* $p$ and $q$ are the overall proportions.
+
+The results interpretation:
+
+- if $|z|\lt 1.96$, then the difference is not significant at $5\%$
+- if $|z|\ge 1.96$, then the difference is significant at $5\%$
+
+The significance level (p-value) corresponding to the z-statistic can be read in the z-table. We’ll see how to compute it in R.
+
+
+this test can be done by means of R using `prop.test` function.
+
+`
+prop.test(x, n, p = NULL, alternative = "two.sided",
+          correct = TRUE)
+`
+
+where
+
+- x: a vector of counts of successes
+- n: a vector of count trials
+- alternative: a character string specifying the alternative hypothesis
+- correct: a logical indicating whether Yates’ continuity correction should be applied where possible
+
+
+We want to know, whether the obtained conversions are the same in the two groups of individuals?
+
+``` {r echo=TRUE, warning=FALSE, cache=TRUE}
+
+prop.test(x=c(7339,6645), n=c(27182, 23175))
+
+```
+
+
+The p-value of the test is $3.05\cdot10^{-5}$, which is less than the significance level alpha = 0.05. We can conclude that the proportion of smokers is significantly different in the two groups with a p-value = $3.05\cdot10^{-5}$.
+
+
+

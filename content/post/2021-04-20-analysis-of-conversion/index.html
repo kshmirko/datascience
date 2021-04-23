@@ -62,3 +62,59 @@ text(x=obs_pct_diff, y=180, labels = &quot;Observed conversion&quot;, adj=1)</co
 <p>Let’s simulate a random process, in which among 50357 unique visitors conversion was in 13984 cases. That is, we create a vector of length 50357, in which the 36373 elements are zero, and 13984 are equal to 1. Now we randomly form two vectors A and B of length 27182 and 23175 consequently many times (e.g. 1000).</p>
 <p>In each vector, we will consider the ratio of the number of units to the sample size and find the difference between themselves. <span class="math inline">\(\delta=\frac{count(A==1)}{length(A)}-\frac{count(B==1)}{length(B)}\)</span></p>
 <p>At each iteration, the change in the <span class="math inline">\(\delta\)</span> was saved in the vector and later used to build the histogram.</p>
+<div id="alternative-approach" class="section level2">
+<h2>Alternative approach</h2>
+<p>What we have done above is called bootstrapping, we simulate statistical experiment many times and then give the explanation through analysis of the result.</p>
+<p>But this technique becomes available only in computer era.</p>
+<p>We also can get same results using z-test (for large sample size) of Fisher Exact probability test otherwise. In this case we have following hypotheses</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(H_0: p_A=p_B\)</span></li>
+<li><span class="math inline">\(H_0: p_A \le p_B\)</span></li>
+<li><span class="math inline">\(H_0: p_A \ge p_B\)</span></li>
+</ol>
+<p>and corresponding alternative hypotheses are:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(H_a: p_A \ne p_B\)</span></li>
+<li><span class="math inline">\(H_0: p_A \gt p_B\)</span></li>
+<li><span class="math inline">\(H_0: p_A \lt p_B\)</span></li>
+</ol>
+<p>The test ststistics can be calculated as follows:</p>
+<p><span class="math display">\[
+  z=\frac{p_A-p_B}{\sqrt{pq/n_A - pq/n_B}}
+\]</span>
+where</p>
+<ul>
+<li><span class="math inline">\(p_A\)</span> is the proportion observed in group A with size <span class="math inline">\(n_A\)</span>;</li>
+<li><span class="math inline">\(p_B\)</span> is the proportion observed in group B with size <span class="math inline">\(n_B\)</span>;</li>
+<li><span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> are the overall proportions.</li>
+</ul>
+<p>The results interpretation:</p>
+<ul>
+<li>if <span class="math inline">\(|z|\lt 1.96\)</span>, then the difference is not significant at <span class="math inline">\(5\%\)</span></li>
+<li>if <span class="math inline">\(|z|\ge 1.96\)</span>, then the difference is significant at <span class="math inline">\(5\%\)</span></li>
+</ul>
+<p>The significance level (p-value) corresponding to the z-statistic can be read in the z-table. We’ll see how to compute it in R.</p>
+<p>this test can be done by means of R using <code>prop.test</code> function.</p>
+<p><code>prop.test(x, n, p = NULL, alternative = "two.sided",           correct = TRUE)</code></p>
+<p>where</p>
+<ul>
+<li>x: a vector of counts of successes</li>
+<li>n: a vector of count trials</li>
+<li>alternative: a character string specifying the alternative hypothesis</li>
+<li>correct: a logical indicating whether Yates’ continuity correction should be applied where possible</li>
+</ul>
+<p>We want to know, whether the obtained conversions are the same in the two groups of individuals?</p>
+<pre class="r"><code>prop.test(x=c(7339,6645), n=c(27182, 23175))</code></pre>
+<pre><code>## 
+##  2-sample test for equality of proportions with continuity correction
+## 
+## data:  c(7339, 6645) out of c(27182, 23175)
+## X-squared = 17.386, df = 1, p-value = 3.05e-05
+## alternative hypothesis: two.sided
+## 95 percent confidence interval:
+##  -0.024634943 -0.008838141
+## sample estimates:
+##    prop 1    prop 2 
+## 0.2699948 0.2867314</code></pre>
+<p>The p-value of the test is <span class="math inline">\(3.05\cdot10^{-5}\)</span>, which is less than the significance level alpha = 0.05. We can conclude that the proportion of smokers is significantly different in the two groups with a p-value = <span class="math inline">\(3.05\cdot10^{-5}\)</span>.</p>
+</div>
